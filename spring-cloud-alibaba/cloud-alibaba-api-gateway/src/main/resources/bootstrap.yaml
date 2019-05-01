@@ -1,0 +1,53 @@
+#server.port: 9000
+
+#management:
+#  endpoint:
+#    nacos-config:
+#      enabled: true
+#      cache:
+#        time-to-live: 0ms
+#    nacos-discovery:
+#      enabled: true
+#      cache:
+#        time-to-live: 0ms
+
+spring:
+  application:
+    name: cloud-alibaba-api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 5c1aa066-7a0b-4199-81e9-db70852e5409
+
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: 5c1aa066-7a0b-4199-81e9-db70852e5409
+        file-extension: yaml
+        # group: COMMON_CONFIG # 并不能控制shared-dataids、refreshable-dataids
+        shared-dataids: common-actuator.yaml
+        refreshable-dataids: common-actuator.yaml
+        ext-config:
+          - group: FEIGN_GROUP
+            data-id: feign.yaml
+            refresh: true
+
+          - group: GATEWAY_GROUP
+            data-id: api-gateway.yaml
+            refresh: true
+
+          - group: HYSTRIX_GROUP
+            data-id: gateway-hystrix.yaml
+            refresh: true
+
+          - group: COMMON_GROUP
+            data-id: common-logging.yaml
+            refresh: true
+
+
+

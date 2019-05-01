@@ -1,0 +1,19 @@
+management:
+  server:
+    port: 1${server.port}
+    ssl:
+      enabled: false
+  endpoint:
+    health:
+      show-details: always
+      cache:
+        time-to-live: 30s
+    httptrace:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: # 如果需要开放所有: '*' (*在yaml中是关键字，需要用单引号转换)
+          - info
+          - health
+          - httptrace

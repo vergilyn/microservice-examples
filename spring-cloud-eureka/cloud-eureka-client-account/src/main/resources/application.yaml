@@ -1,0 +1,7 @@
+#server.port: 901X
+
+spring:
+  application:
+    name: cloud-eureka-client-account
+  profiles:
+    active: actuator, druid, eureka, feign, hystrix

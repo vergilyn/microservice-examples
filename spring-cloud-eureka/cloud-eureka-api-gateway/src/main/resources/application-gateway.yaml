@@ -1,0 +1,53 @@
+spring:
+  # redis-rate-limiter 注意: 与RedisTemplate冲突
+  redis:
+    host: localhost
+    port: 6379
+    database: 4
+  # gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      default-filters: # org.springframework.cloud.gateway.filter
+      #  - PrefixPath=/api
+        - name: Hystrix
+          args:
+            name: defaultHystrixCommand
+            fallbackUri: 'forward:/default-fallback'
+
+      routes:
+        - id: account
+          uri: lb://cloud-eureka-client-account
+          predicates:
+            - Path=/api/account/**
+          filters:
+            - StripPrefix=1
+
+        - id: order
+          uri: lb://cloud-eureka-client-order
+          predicates:
+            - Path=/api/order/**
+
+        - id: order
+          uri: lb://cloud-eureka-client-storage
+          predicates:
+            - Path=/api/storage/**
+          filters:
+            - StripPrefix=1
+
+        - id: business
+          uri: lb://cloud-eureka-client-merge-business
+          predicates:
+            - Path=/api/business/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.burstCapacity: 10
+                redis-rate-limiter.replenishRate: 1
+                key-resolver: "#{@ipKeyResolver}"
+
+

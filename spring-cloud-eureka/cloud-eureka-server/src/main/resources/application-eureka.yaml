@@ -1,0 +1,19 @@
+# eureka-server
+eureka:
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+    enable-self-preservation: false # 关闭注册中心的自我保护，方便本地调试时即时剔除失效的实例
+    eviction-interval-timer-in-ms: 60000
+    renewal-percent-threshold: 0.85
+    renewal-threshold-update-interval-ms: 900000
+  instance:
+    hostname: eureka-server-${server.port}
+    # instance-id:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    registry-fetch-interval-seconds: 30
+    filter-only-up-instances: true  # 只获取UP状态的实例
+

@@ -1,0 +1,17 @@
+server:
+  port: 10000
+
+spring:
+  application:
+    name: cloud-nacos-security
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 6000
+    database: 10
+    lettuce:
+      pool:
+        max-idle: 8
+        max-active: 8
+        max-wait: -1ms
+        min-idle: 0

@@ -1,0 +1,12 @@
+# eureka-client
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    enabled: true
+  instance:
+    hostname: ${spring.application.name}-${server.port}
+    # prefer-ip-address: true
+    # instance-id: ${eureka.instance.ip-address}:${server.port}
+    # status-page-url-path: /actuator/info
+    # health-check-url-path: /actuator/health

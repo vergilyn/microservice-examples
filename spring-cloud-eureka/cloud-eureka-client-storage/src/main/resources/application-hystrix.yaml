@@ -1,0 +1,15 @@
+# hystrix
+# com.netflix.hystrix.HystrixThreadPoolProperties
+# com.netflix.hystrix.HystrixCommandProperties
+hystrix:
+  threadpool:
+    default:
+      coreSize: 20
+      maxQueueSize: -1
+      queueSizeRejectionThreshold: 5
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000

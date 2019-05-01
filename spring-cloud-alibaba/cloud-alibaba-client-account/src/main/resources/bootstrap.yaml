@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: cloud-alibaba-client-account
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 5c1aa066-7a0b-4199-81e9-db70852e5409
+
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: 5c1aa066-7a0b-4199-81e9-db70852e5409
+        file-extension: yaml
+        shared-dataids: common-actuator.yaml
+        refreshable-dataids: common-actuator.yaml
+        ext-config:
+          - group: DATASOURCE_GROUP
+            data-id: datasource-druid.yaml
+            refresh: true
+
+          - group: FEIGN_GROUP
+            data-id: feign.yaml
+            refresh: true
+
+          - group: HYSTRIX_GROUP
+            data-id: hystrix.yaml
+            refresh: true
