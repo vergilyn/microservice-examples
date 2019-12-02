@@ -15,6 +15,8 @@
         <module>spring-cloud-eureka</module>
         <module>common/vergilyn-common-autoconfigure</module>
         <module>common/vergilyn-common-dependencies</module>
+        <module>microservice-test-examples</module>
+        <module>apache-dubbo</module>
     </modules>
 
     <repositories>
@@ -33,7 +35,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <spring-boot-dependencies.version>2.1.4.RELEASE</spring-boot-dependencies.version>
+        <spring-boot-dependencies.version>2.2.1.RELEASE</spring-boot-dependencies.version>
         <spring-cloud-dependencies.version>Greenwich.RELEASE</spring-cloud-dependencies.version>
 
         <alibaba-druid.version>1.1.14</alibaba-druid.version>
