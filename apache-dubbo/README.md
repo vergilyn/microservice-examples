@@ -33,12 +33,36 @@
 
 ## 环境
 
-| project     | server.port  | management.server.port | dubbo.protocol.port |
-| :--------   | :----------: |:----------------------:| :-----------------: |
-| provider    | 901X         | -----                  | 10010               |
-| consumer    | 902X         | 1902X                  |                     |
+| project       | server.port  | management.server.port | dubbo.protocol.port |
+| :--------     | :----------: |:----------------------:| :-----------------: |
+| provider      | 901X         | 1901X                  | 10010               |
+| consumer      | 902X         | 1902X                  |                     |
+| nacos(v1.0.0) | 8848         |                        |                     |
+
+### dubbo-nacos
+1) 需要nacos服务
+2) maven（provider、consumer的pom.xml）增加nacos的依赖:  
+    ```
+         <!--region registry-nacos dependencies -->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-registry-nacos</artifactId>
+            <version>${apache-dubbo.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>${alibaba-nacos.version}</version>
+        </dependency>
+        <!--endregion-->
+    ```
+
+之后可以在 http://127.0.0.1:8848/nacos 的 `服务管理 - 服务列表`看到注册信息。
 
 ## 问题备注
-1. issue看到的一个有意思的问题
-[issue#590](https://github.com/apache/dubbo-spring-boot-project/issues/590)
+1. dubbo 部分配置貌似暂不支持yaml。
+
+2. issue
+ - [issue#590 Comsumer没有默认使用Provider的设置（例如timeout, retires等配置项）](https://github.com/apache/dubbo-spring-boot-project/issues/590)
 

@@ -29,6 +29,20 @@
             <artifactId>dubbo-spring-boot-actuator</artifactId>
         </dependency>
 
+        <!--region registry-nacos dependencies -->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-registry-nacos</artifactId>
+            <version>${apache-dubbo.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>${alibaba-nacos.version}</version>
+        </dependency>
+        <!--endregion-->
+
         <!-- Dubbo Spring Boot Starter -->
         <dependency>
             <groupId>org.apache.dubbo</groupId>

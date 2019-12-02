@@ -4,9 +4,10 @@ import com.vergilyn.examples.dubbo.service.ProviderService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 /**
  * @author VergiLyn
@@ -14,17 +15,21 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @Slf4j
-public class DubboConsumerApplication implements CommandLineRunner {
+public class DubboConsumerApplication {
 
-    @Reference(version = "${demo.service.version}", url = "${demo.service.url}", timeout = 1200)
+    // @Reference(version = "${demo.service.version}", url = "${demo.service.url}", timeout = 2000)  // dubbo-basic 需要指定url
+    @Reference(version = "${demo.service.version}", timeout = 2000)  // dubbo-nacos 不需要指定url
     private ProviderService providerService;
 
     public static void main(String[] args) {
-        SpringApplication.run(DubboConsumerApplication.class, args);
+        SpringApplication application = new SpringApplication(DubboConsumerApplication.class);
+        application.setAdditionalProfiles("dubbo-nacos");
+        application.run(args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-//        log.info(providerService.sayHello("vergilyn"));
+    @Bean
+    public ApplicationRunner runner() {
+        return args -> log.info(providerService.sayHello("vergilyn"));
     }
+
 }

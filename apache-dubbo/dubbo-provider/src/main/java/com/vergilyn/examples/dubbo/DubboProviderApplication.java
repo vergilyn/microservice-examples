@@ -11,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DubboProviderApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DubboProviderApplication.class, args);
+        SpringApplication application = new SpringApplication(DubboProviderApplication.class);
+        application.setAdditionalProfiles("dubbo-nacos");
+        application.run(args);
     }
 }

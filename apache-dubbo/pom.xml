@@ -36,6 +36,7 @@
 
     <properties>
         <apache-dubbo.version>2.7.4.1</apache-dubbo.version>
+        <alibaba-nacos.version>1.0.0</alibaba-nacos.version>
     </properties>
 
     <dependencyManagement>
@@ -82,6 +83,20 @@
                 <artifactId>dubbo-spring-boot-actuator</artifactId>
                 <version>${apache-dubbo.version}</version>
             </dependency>
+
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-registry-nacos</artifactId>
+                <version>${apache-dubbo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${alibaba-nacos.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

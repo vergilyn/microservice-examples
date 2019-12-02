@@ -11,8 +11,6 @@ server:
 demo:
   service:
     version: 1.0.0
-    url: dubbo://localhost:10010
-
 
 
 

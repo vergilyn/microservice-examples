@@ -1,0 +1,19 @@
+server:
+  port: 9010
+
+spring:
+  application:
+    name: dubbo-provider-application
+  profiles:
+    active:
+      - actuator
+
+# Base packages to scan Dubbo Component: @org.apache.dubbo.config.annotation.Service
+dubbo:
+  scan:
+    base-packages: com.vergilyn.examples.dubbo.service
+
+## DemoService version
+demo:
+  service:
+    version: 1.0.0
