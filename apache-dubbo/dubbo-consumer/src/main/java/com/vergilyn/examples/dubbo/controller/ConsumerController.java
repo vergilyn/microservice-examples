@@ -24,7 +24,7 @@ public class ConsumerController {
     @GetMapping(value = "/say-hello")
     public String sayHello(@RequestParam String name) {
         String resp = providerService.sayHello(name);
-        log.info("sayHello() >>>> name: {}, resp: {}", name, providerService.sayHello(name));
+        log.info("sayHello() >>>> name: {}, resp: {}", name, resp);
         return resp;
     }
 }

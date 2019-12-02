@@ -1,33 +1,18 @@
 spring:
   application:
-    name: dubbo-externalized-configuration-consumer-sample
+    name: dubbo-consumer-application
+  profiles:
+    active:
+      - actuator
+
+server:
+  port: 9020
 
 demo:
   service:
     version: 1.0.0
     url: dubbo://localhost:10010
-server:
-  port: 9020
 
-management:
-  server:
-    port: 1${server.port}
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    dubbo:
-      enabled: true
-    dubboshutdown:
-      enabled: true
-    dubboconfigs:
-      enabled: true
-    dubboservices:
-      enabled: true
-    dubboreferences:
-      enabled: true
-    dubboproperties:
-      enabled: true
+
 
 

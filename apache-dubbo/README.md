@@ -39,4 +39,6 @@
 | consumer    | 902X         | 1902X                  |                     |
 
 ## 问题备注
-1. 
+1. issue看到的一个有意思的问题
+[issue#590](https://github.com/apache/dubbo-spring-boot-project/issues/590)
+
