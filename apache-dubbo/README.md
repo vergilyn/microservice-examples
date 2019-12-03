@@ -12,7 +12,7 @@
 [Github dubbo-spring-boot-project]: https://github.com/apache/dubbo-spring-boot-project
 [Github dubbo-admin]: https://github.com/apache/dubbo-admin
 
-## 特性
+## dubbo特性
 1. 面向接口代理的高性能RPC调用  
 提供高性能的基于代理的远程调用能力，服务以接口为粒度，为开发者屏蔽远程调用底层细节。
 
@@ -31,7 +31,22 @@
 6. 可视化的服务治理与运维  
 提供丰富服务治理、运维工具：随时查询服务元数据、服务健康状态及调用统计，实时下发路由策略、调整配置参数。
 
+### 其它
+1. [多协议](http://dubbo.apache.org/zh-cn/docs/user/demos/multi-protocols.html)
+dubbo 允许配置多协议，在不同服务上支持不同协议，或者同一服务上同时支持多种协议。
+  
+2. [多注册中心](http://dubbo.apache.org/zh-cn/docs/user/demos/multi-registry.html)
+dubbo 支持同一服务向多注册中心同时注册，或者不同服务分别注册到不同的注册中心上去，甚至可以同时引用注册在不同注册中心上的同名服务。
+
+
+
+
+
+
+
 ## 环境
+
+dubbo: version-2.7.4.1
 
 | project       | server.port  | management.server.port | dubbo.protocol.port |
 | :--------     | :----------: |:----------------------:| :-----------------: |
@@ -65,4 +80,33 @@
 
 2. issue
  - [issue#590 Comsumer没有默认使用Provider的设置（例如timeout, retires等配置项）](https://github.com/apache/dubbo-spring-boot-project/issues/590)
+
+## dubbo-spring-boot-actuator
+- [dubbo-spring-boot-actuator docs](https://github.com/apache/dubbo-spring-boot-project/tree/master/dubbo-spring-boot-actuator)
+
+Dubbo Spring Boot providers actuator endpoints , however some of them are disable.   
+If you'd like to enable them , please add following properties into externalized configuration :
+
+```properties
+# Enables Dubbo All Endpoints
+management.endpoint.dubbo.enabled = true
+management.endpoint.dubboshutdown.enabled = true
+management.endpoint.dubboconfigs.enabled = true
+management.endpoint.dubboservices.enabled = true
+management.endpoint.dubboreferences.enabled = true
+management.endpoint.dubboproperties.enabled = true
+```
+
+Actuator endpoint `dubbo` supports Actuator Endpoints : 
+
+| ID                  | Enabled    | HTTP URI                     | HTTP Method | Description                         | Content Type       |
+| ------------------- | ---------- | ---------------------------- | ----------- | ----------------------------------- | ------------------ |
+| `dubbo`             | `true`     | `/actuator/dubbo`            | `GET`       | Exposes Dubbo's meta data           | `application/json` |
+| `dubboproperties`   | `true`     | `/actuator/dubbo/properties` | `GET`       | Exposes all Dubbo's Properties      | `application/json` |
+| `dubboservices`     | `false`    | `/dubbo/services`            | `GET`       | Exposes all Dubbo's `ServiceBean`   | `application/json` |
+| `dubboreferences`   | `false`    | `/actuator/dubbo/references` | `GET`       | Exposes all Dubbo's `ReferenceBean` | `application/json` |
+| `dubboconfigs`      | `true`     | `/actuator/dubbo/configs`    | `GET`       | Exposes all Dubbo's `*Config`       | `application/json` |
+| `dubboshutdown`     | `false`    | `/actuator/dubbo/shutdown`   | `POST`      | Shutdown Dubbo services             | `application/json` |
+
+
 

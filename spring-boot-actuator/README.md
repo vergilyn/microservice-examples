@@ -1,8 +1,9 @@
 # spring-boot-actuator
 
-[spring-boot reference: spring-boot-actuator][spring-boot-actuator cn]  
-[Spring Boot 2.0官方文档之 Actuator][spring-boot-actuator zh]  
-[Introducing Actuator Endpoints in Spring Boot 2.0]
+- [spring-boot reference: spring-boot-actuator][spring-boot-actuator cn]  
+- [Spring Boot 2.0官方文档之 Actuator][spring-boot-actuator zh]  
+- [Introducing Actuator Endpoints in Spring Boot 2.0]  
+- [dubbo-spring-boot-actuator][dubbo-spring-boot-project]：可以用来参考如何扩展`spring-boot-actuator` 
 
 ## 问题
 1. 访问`http://localhost:xxxx/health`返回`404`。
@@ -47,3 +48,4 @@ info:
 [spring-boot-actuator zh]: https://blog.csdn.net/alinyua/article/details/80009435
 [Unable to add request/response body to HttpTrace]: https://github.com/spring-projects/spring-boot/issues/12953#issuecomment-383830749
 [Introducing Actuator Endpoints in Spring Boot 2.0]: https://spring.io/blog/2017/08/22/introducing-actuator-endpoints-in-spring-boot-2-0
+[dubbo-spring-boot-project]: https://github.com/apache/dubbo-spring-boot-project
