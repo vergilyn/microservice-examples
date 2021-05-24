@@ -13,7 +13,6 @@ spring-cloud全家桶搭建的微服务示例
 | ORDER    | 882X         | 1882X                  |
 | STORAGE  | 883X         | 1883X                  |
 
-测试参考[EurekaCloudTest.java]
 
 ## 备注
 1. hystrix的请求合并、请求缓存

@@ -7,50 +7,52 @@
     <groupId>com.vergilyn.examples</groupId>
     <artifactId>microservice-examples</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${revision}</version>
 
     <modules>
         <module>spring-boot-actuator</module>
         <module>spring-cloud-alibaba</module>
         <module>spring-cloud-eureka</module>
-        <module>common/vergilyn-common-autoconfigure</module>
-        <module>common/vergilyn-common-dependencies</module>
+        <module>common</module>
         <module>microservice-test-examples</module>
         <module>apache-dubbo</module>
     </modules>
-
-    <repositories>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <id>nexus-aliyun</id>
-            <name>Nexus aliyun</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-        </repository>
-    </repositories>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <spring-boot-dependencies.version>2.2.1.RELEASE</spring-boot-dependencies.version>
+        <revision>1.0.0-SNAPSHOT</revision>
+
+        <spring-boot-dependencies.version>2.2.11.RELEASE</spring-boot-dependencies.version>
         <spring-cloud-dependencies.version>Hoxton.RELEASE</spring-cloud-dependencies.version>
 
-        <alibaba-druid.version>1.1.14</alibaba-druid.version>
+        <projectlombok.version>1.18.10</projectlombok.version>
+        <google-guava.version>30.0-jre</google-guava.version>
+        <alibaba-fastjson.version>1.2.62</alibaba-fastjson.version>
 
-        <google-guava.version>24.1-jre</google-guava.version>
-        <projectlombok.version>1.18.4</projectlombok.version>
-        <alibaba-fastjson.version>1.2.54</alibaba-fastjson.version>
-        <apache-common-lang3.version>3.5</apache-common-lang3.version>
-        <apache-common-io.version>2.6</apache-common-io.version>
-        <testng.version>6.14.2</testng.version>
+        <alibaba-druid.version>1.2.4</alibaba-druid.version>
         <mysql-connector.version>5.1.47</mysql-connector.version>
+
+        <apache-common-lang3.version>3.9</apache-common-lang3.version>
+        <apache-common-text.version>1.9</apache-common-text.version>
+        <apache-common-io.version>2.6</apache-common-io.version>
+        <apache-common-beanutils.version>1.9.4</apache-common-beanutils.version>
+        <apache-common-fileupload.version>1.4</apache-common-fileupload.version>
+        <apache-common-httpclient.version>4.5.10</apache-common-httpclient.version>
+        <apache-common-collections4.version>4.4</apache-common-collections4.version>
+        <apache-common-codec.version>1.15</apache-common-codec.version>
+        <apache-common-pool2.version>2.6.1</apache-common-pool2.version>
+
+        <testng.version>7.4.0</testng.version>
+        <mockito-core.version>3.7.7</mockito-core.version>
+        <hamcrest.version>2.2</hamcrest.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- spring-boot -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -59,6 +61,7 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- spring-cloud-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -72,49 +75,51 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${alibaba-druid.version}</version>
             </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
 
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-text</artifactId>
+                <version>${apache-common-text.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${apache-common-beanutils.version}</version>
+            </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${apache-common-io.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql-connector.version}</version>
-                <scope>runtime</scope>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${apache-common-fileupload.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${apache-common-httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${apache-common-codec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${apache-common-pool2.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${google-guava.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${alibaba-fastjson.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -122,12 +127,72 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- logger -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+
+        <!-- utils -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${google-guava.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${apache-common-lang3.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${apache-common-collections4.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${alibaba-fastjson.version}</version>
+        </dependency>
 
+        <!-- test -->
+        <!-- spring-boot-starter-test 包含logger的依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

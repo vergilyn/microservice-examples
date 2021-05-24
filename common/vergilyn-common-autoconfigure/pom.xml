@@ -6,13 +6,12 @@
 
     <parent>
         <groupId>com.vergilyn.examples</groupId>
-        <artifactId>microservice-examples</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
+        <artifactId>common-dependencies</artifactId>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>vergilyn-common-autoconfigure</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -38,6 +37,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector.version}</version>
         </dependency>
     </dependencies>
 

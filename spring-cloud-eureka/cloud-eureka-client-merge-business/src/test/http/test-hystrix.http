@@ -1,0 +1,5 @@
+###
+GET http://{{hostname-merge-business}}/business/hystrix?code=123&millis=1000
+
+###
+GET http://{{hostname-merge-business}}/business/hystrix?code=123&millis=3000
