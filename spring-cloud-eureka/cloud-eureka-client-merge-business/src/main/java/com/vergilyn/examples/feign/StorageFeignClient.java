@@ -31,7 +31,10 @@ class StorageFeignClientHystrix implements FallbackFactory<StorageFeignClient> {
         return new StorageFeignClient() {
             @Override
             public ObjectResponse<Void> decrease(CommodityDTO commodityDTO) {
-                return null;
+                ObjectResponse<Void> response = new ObjectResponse<>();
+                response.result(RspStatusEnum.HYSTRIX);
+                response.setMessage(response.getMessage() + " error: " + cause.getMessage());
+                return response;
             }
 
             @Override

@@ -5,4 +5,8 @@ spring:
   application:
     name: cloud-eureka-client-merge-business
   profiles:
-    active: actuator, eureka, feign, hystrix
+    active:
+      - actuator
+      - eureka
+      - feign
+      - hystrix
