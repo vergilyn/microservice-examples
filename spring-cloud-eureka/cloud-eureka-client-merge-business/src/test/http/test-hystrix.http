@@ -3,3 +3,12 @@ GET http://{{hostname-merge-business}}/business/hystrix?code=123&millis=1000
 
 ###
 GET http://{{hostname-merge-business}}/business/hystrix?code=123&millis=3000
+
+
+###
+POST http://{{hostname-merge-business}}/business/buy
+Content-Type: application/json
+
+{
+  "userId": "409839163"
+}
