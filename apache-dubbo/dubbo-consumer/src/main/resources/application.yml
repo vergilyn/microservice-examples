@@ -1,16 +1,9 @@
+server:
+  port: 9020
+
 spring:
   application:
     name: dubbo-consumer-application
   profiles:
     active:
       - actuator
-
-server:
-  port: 9020
-
-demo:
-  service:
-    version: 1.0.0
-
-
-
