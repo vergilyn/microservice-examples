@@ -16,6 +16,7 @@
         <module>common</module>
         <module>microservice-test-examples</module>
         <module>apache-dubbo</module>
+        <module>alibaba-sentinel-examples</module>
     </modules>
 
     <properties>
@@ -27,6 +28,8 @@
 
         <spring-boot-dependencies.version>2.2.11.RELEASE</spring-boot-dependencies.version>
         <spring-cloud-dependencies.version>Hoxton.SR12</spring-cloud-dependencies.version>
+
+        <alibaba-sentinel.version>1.8.2</alibaba-sentinel.version>
 
         <projectlombok.version>1.18.10</projectlombok.version>
         <google-guava.version>30.0-jre</google-guava.version>
@@ -68,6 +71,27 @@
                 <version>${spring-cloud-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-core</artifactId>
+                <version>${alibaba-sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-annotation-aspectj</artifactId>
+                <version>${alibaba-sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-datasource-redis</artifactId>
+                <version>${alibaba-sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-logging-slf4j</artifactId>
+                <version>${alibaba-sentinel.version}</version>
             </dependency>
 
             <dependency>
