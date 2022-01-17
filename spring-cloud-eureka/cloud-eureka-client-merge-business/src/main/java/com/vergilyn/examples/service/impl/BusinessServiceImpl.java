@@ -19,10 +19,18 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class BusinessServiceImpl implements BusinessService {
-    @Autowired
     private StorageFeignClient storageFeignClient;
-    @Autowired
     private OrderFeignClient orderFeignClient;
+
+    @Autowired
+    public void setStorageFeignClient(StorageFeignClient storageFeignClient) {
+        this.storageFeignClient = storageFeignClient;
+    }
+
+    @Autowired
+    public void setOrderFeignClient(OrderFeignClient orderFeignClient) {
+        this.orderFeignClient = orderFeignClient;
+    }
 
     @Override
     public ObjectResponse<OrderDTO> handleBusiness(BusinessDTO businessDTO) {
@@ -30,7 +38,7 @@ public class BusinessServiceImpl implements BusinessService {
         CommodityDTO commodityDTO = new CommodityDTO();
         commodityDTO.setCommodityCode(businessDTO.getCommodityCode());
         commodityDTO.setTotal(businessDTO.getTotal());
-        ObjectResponse storageResponse = storageFeignClient.decrease(commodityDTO);
+        ObjectResponse<Void> storageResponse = storageFeignClient.decrease(commodityDTO);
         log.info("storage >>>> request: {}, response: {}", JSON.toJSONString(commodityDTO), JSON.toJSONString(storageResponse));
 
         //2、创建订单
@@ -39,14 +47,14 @@ public class BusinessServiceImpl implements BusinessService {
         orderDTO.setCommodityCode(businessDTO.getCommodityCode());
         orderDTO.setOrderTotal(businessDTO.getTotal());
         orderDTO.setOrderAmount(businessDTO.getAmount());
-        ObjectResponse<OrderDTO> response = orderFeignClient.create(orderDTO);
-        log.info("order >>>> request: {}, response: {}", JSON.toJSONString(orderDTO), JSON.toJSONString(response));
+        ObjectResponse<OrderDTO> orderResponse = orderFeignClient.create(orderDTO);
+        log.info("order >>>> request: {}, response: {}", JSON.toJSONString(orderDTO), JSON.toJSONString(orderResponse));
 
-        if (storageResponse.getStatus() != 200 || response.getStatus() != 200) {
+        if (storageResponse.getStatus() != 200 || orderResponse.getStatus() != 200) {
             throw new DefaultException(RspStatusEnum.FAIL);
         }
 
-        return ObjectResponse.success(response.getData());
+        return ObjectResponse.success(orderResponse.getData());
     }
 
     @Override

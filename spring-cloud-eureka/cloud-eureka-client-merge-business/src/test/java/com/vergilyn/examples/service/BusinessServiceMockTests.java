@@ -10,15 +10,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.TestPropertySource;
 
 // 不依赖registry-center，且FeignClient请求使用 Mock 或者 服务降级。
 @TestPropertySource(properties = "eureka.client.enabled=false")
-public class BusinessServiceTests extends AbstractEurekaClientBusinessTests {
+public class BusinessServiceMockTests extends AbstractEurekaClientBusinessTests {
 
-	@SpyBean
+	@Autowired
 	private BusinessService businessService;
 
 	/**
