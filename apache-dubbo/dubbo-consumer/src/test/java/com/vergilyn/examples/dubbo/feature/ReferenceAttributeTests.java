@@ -1,12 +1,9 @@
-package com.vergilyn.examples.dubbo;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.util.Map;
+package com.vergilyn.examples.dubbo.feature;
 
 import com.alibaba.spring.util.AnnotationUtils;
+import com.vergilyn.examples.dubbo.DubboConsumerApplication;
+import com.vergilyn.examples.dubbo.ProviderConstants;
 import com.vergilyn.examples.dubbo.service.ProviderService;
-
 import lombok.SneakyThrows;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -22,6 +19,10 @@ import org.springframework.core.env.PropertyResolver;
 import org.springframework.stereotype.Service;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.util.ReflectionUtils;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.util.Map;
 
 /**
  * 验证 `dubbo.@Reference`(2.7.0+) 或 `dubbo.@DubboReference`(2.7.7+) 其指定的 `attribute` 与 `dubbo.consumer.*` 的优先级。

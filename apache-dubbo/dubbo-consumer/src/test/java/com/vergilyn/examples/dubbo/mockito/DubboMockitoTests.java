@@ -1,22 +1,28 @@
-package com.vergilyn.examples.dubbo;
+package com.vergilyn.examples.dubbo.mockito;
 
 import com.alibaba.fastjson.JSON;
+import com.vergilyn.examples.dubbo.DubboConsumerApplication;
+import com.vergilyn.examples.dubbo.ProviderConstants;
 import com.vergilyn.examples.dubbo.service.ProviderService;
-
 import lombok.SneakyThrows;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.MockitoPostProcessor;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.test.context.TestPropertySource;
 
+import java.lang.reflect.Field;
 
 /**
  * 如果通过 spring-boot-test 友好的 Mock dubbo-reference？
@@ -39,8 +45,7 @@ import org.springframework.test.context.TestPropertySource;
  * @since 2021-09-18
  *
  */
-@SpringBootTest(classes = DubboConsumerApplication.class,
-		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = DubboConsumerApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = {
 		// `injvm`: Whether to find reference's instance from the current JVM.(Deprecated
 		// instead, use the parameter scope to judge if it's in jvm, scope=local)
@@ -51,10 +56,20 @@ import org.springframework.test.context.TestPropertySource;
 		// `lazy`: (default false), Whether to make connection when the client is created。
 		// , "dubbo.consumer.lazy = false"
 })
+// @org.springframework.context.annotation.Import(MockReferenceAnnotationBeanPostProcessor.class)
+@org.springframework.context.annotation.Import(DubboReferenceInstantiationAwareBeanPostProcessor.class)
+// @org.springframework.context.annotation.Import(DubboReferencePostProcessAfterInitialization.class)
+@SuppressWarnings("JavadocReference")
 public class DubboMockitoTests {
 
+	/**
+	 * {@linkplain SpyBean} 未触发 {@linkplain MockDubboReferenceBeanProcessor#postProcessAfterInitialization(Object, String)}。
+	 * 原因：{@linkplain MockitoPostProcessor#registerSpy(ConfigurableListableBeanFactory, BeanDefinitionRegistry, SpyDefinition, Field)} )} 中直接registry-singleton-object
+	 */
 	@SpyBean
+	// @Autowired
 	private ConsumerMockitoService consumerMockitoService;
+
 	// ERROR: dubbo bean-name 默认不是“全限定名”
 	// @MockBean(name = "com.vergilyn.examples.dubbo.service.ProviderService")
 	// 可能的 dubbo bean-name，很不友好，跟“成员变量”依赖注入的时候声明有关系。(依然无法达到mock)
@@ -64,6 +79,8 @@ public class DubboMockitoTests {
 
 	@Autowired
 	private ApplicationContext applicationContext;
+	@Autowired
+	private BeanFactory beanFactory;
 
 	@BeforeEach
 	public void beforeEach(){
@@ -71,6 +88,11 @@ public class DubboMockitoTests {
 					+ JSON.toJSONString(applicationContext.getBeanNamesForType(ProviderService.class), true));
 	}
 
+	/**
+	 * 2022-01-27 >>>>
+	 *   3种方式其实都差不多。
+	 *   现在相对推荐 `{@link MockReferenceAnnotationBeanPostProcessor} > {@link DubboReferenceInstantiationAwareBeanPostProcessor}`
+	 */
 	@SneakyThrows
 	@Test
 	public void mock(){
@@ -95,4 +117,6 @@ public class DubboMockitoTests {
 			return providerService.sayHello(name);
 		}
 	}
+
+
 }
