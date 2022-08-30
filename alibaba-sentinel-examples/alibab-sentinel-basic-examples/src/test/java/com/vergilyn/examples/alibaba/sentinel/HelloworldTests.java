@@ -1,9 +1,5 @@
 package com.vergilyn.examples.alibaba.sentinel;
 
-import java.time.LocalTime;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.alibaba.csp.sentinel.Entry;
 import com.alibaba.csp.sentinel.SphO;
 import com.alibaba.csp.sentinel.SphU;
@@ -12,10 +8,15 @@ import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import com.google.common.collect.Lists;
-
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
+
+import java.time.LocalTime;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class HelloworldTests {
 	private static final String RESOURCE = "helloworld";
@@ -76,5 +77,7 @@ public class HelloworldTests {
 			// 处理被流控的逻辑
 			System.out.printf("[SphO][%s][%d] >>>> blocked. \n", LocalTime.now(), INDEX.get());
 		}
+
+		TimeUnit.MILLISECONDS.sleep(RandomUtils.nextLong(100, 200));
 	}
 }

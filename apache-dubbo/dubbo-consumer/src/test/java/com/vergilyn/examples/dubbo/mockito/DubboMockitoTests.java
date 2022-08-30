@@ -40,6 +40,9 @@ import java.lang.reflect.Field;
  *  <a href="https://github.com/spring-projects/spring-boot/issues/22229">@MockBean on feign client is not working</a>
  *  ：由于上面一个问题造成 </p>
  *
+ * <p>
+ *   <a href="https://github.com/apache/dubbo/issues/9116">
+ *      [dubbo#9116] 在 spring boot 中使用 dubbo, 对注解 @DubboReference 依赖， 希望可以提供 @MockBean 的功能</a>
  *
  * @author vergilyn
  * @since 2021-09-18
@@ -56,8 +59,8 @@ import java.lang.reflect.Field;
 		// `lazy`: (default false), Whether to make connection when the client is created。
 		// , "dubbo.consumer.lazy = false"
 })
-// @org.springframework.context.annotation.Import(MockReferenceAnnotationBeanPostProcessor.class)
-@org.springframework.context.annotation.Import(DubboReferenceInstantiationAwareBeanPostProcessor.class)
+@org.springframework.context.annotation.Import(MockReferenceAnnotationBeanPostProcessor.class)
+// @org.springframework.context.annotation.Import(DubboReferenceInstantiationAwareBeanPostProcessor.class)
 // @org.springframework.context.annotation.Import(DubboReferencePostProcessAfterInitialization.class)
 @SuppressWarnings("JavadocReference")
 public class DubboMockitoTests {

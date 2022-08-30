@@ -5,9 +5,7 @@ import org.mockito.internal.util.MockUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
-import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.springframework.beans.factory.support.*;
 
 import java.lang.reflect.Member;
 import java.util.Map;
@@ -32,7 +30,16 @@ public class MockReferenceAnnotationBeanPostProcessor extends ReferenceAnnotatio
 		// `MockitoPostProcessor#registerMock(...)` 中已经 registry-mock-bean，此处尝试直接获取被注入consumer-dubbo-reference！
 		String[] beanNamesForType = beanFactory.getBeanNamesForType(injectedType);
 		for (String beanName : beanNamesForType) {
-			Object bean = beanFactory.getBean(beanName);
+			/**
+			 * 2022-08-30，`getBean(beanName)` 可能导致 循环依赖。所以改用 `getSingleton(beanName)`
+			 * > Object bean = beanFactory.getBean(beanName);
+			 *
+			 * 参考：
+			 *   - {@linkplain AbstractBeanFactory#getBean(java.lang.String)}
+			 *   - {@linkplain DefaultSingletonBeanRegistry#getSingleton(java.lang.String)}
+			 */
+			Object bean = beanFactory.getSingleton(beanName);
+
 			if (MockUtil.isMock(bean) || MockUtil.isSpy(bean)){
 				return beanName;
 			}
