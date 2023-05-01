@@ -48,7 +48,7 @@
         <apache-common-codec.version>1.15</apache-common-codec.version>
         <apache-common-pool2.version>2.6.1</apache-common-pool2.version>
 
-        <testng.version>7.4.0</testng.version>
+        <testng.version>7.7.0</testng.version>
         <mockito-core.version>3.7.7</mockito-core.version>
         <hamcrest.version>2.2</hamcrest.version>
     </properties>
